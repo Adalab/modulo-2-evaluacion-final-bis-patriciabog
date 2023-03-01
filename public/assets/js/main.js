@@ -66,3 +66,5 @@ function addEventUser() {
    li.addEventListener("click", handleClick);
   }
 }
+
+//# sourceMappingURL=main.js.map
