@@ -22,7 +22,6 @@ function renderUserList(usersData) {
 }
 
 function renderUser(data) {
-   console.log(data);
    if (data.isFriend === true) {
     //Si data.isFriend es true (marcado como amigo) pintamos a lista con la clase selected para que le de el color pink  
       let html = ` <li>
@@ -54,7 +53,6 @@ function handleClick(ev) {
    const selectedFriend = usersData.find(user => user.login.username === idSelected);
    //Añadimos la propiedad isFriend = true a los objetos clicados
    selectedFriend.isFriend = true;
-   console.log(selectedFriend);
    document.getElementById(idSelected).classList.toggle('selected');
    usersList.innerHTML = '';
    renderUserList(usersData);
