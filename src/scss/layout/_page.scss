@@ -4,3 +4,53 @@ body {
   background-color: $color-bg;
   font-family: $font-main;
 }
+
+.list {
+  margin: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    &__users {
+      list-style: none;
+   }
+}
+
+.user {
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  background-color: #8fa5fc;
+  border-radius: 80px;
+  width: 60vw;
+  height: 30vh;
+  margin: 5px;
+  &__name {
+      font-size: 1rem;
+      margin: 5px;
+      margin-top: 15px;
+      
+    }
+  &__img {
+           width: 8rem;
+           height: 8rem;
+           border-radius: 80px;
+           cursor: pointer;
+           margin: 5px;
+         }
+     
+  &__city {
+           font-size: 0.6rem;
+           margin: 5px;
+         }
+    
+  &__username {
+           font-size: 0.5rem;
+           margin: 5px;
+         }
+}
+     
+
+

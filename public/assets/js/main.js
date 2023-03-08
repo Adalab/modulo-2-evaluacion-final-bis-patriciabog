@@ -1,70 +1,84 @@
 'use strict';
-
-let usersList = document.querySelector('.js-users');
+const usersList = document.querySelector('.js-users');
 const url ="https://randomuser.me/api/?results=10";
 const btnSave = document.querySelector('.js-btn-save');
 const btnRecover = document.querySelector('.js-btn-recover');
 
 let usersData = [];
 
-/*
-1.Listado de usuarios
-  -Obtenemos 10 usuarios al azar de la API con fetch, lo limpiamos y seleccionamos name, img, city y username.
-  -Guardamos los datos de los usuarios en un Array
-  -Pintamos en el listado de usuarios con el innerHTML
-*/
-fetch(url)
+//1.-Listado de usuarios
+ fetch(url)
    .then(response => response.json())
    .then(data => {
-      console.log(data.results);
       usersData = data.results;
-       renderUserList(usersData);
+      renderUserList(usersData); 
    });
 
 function renderUserList(usersData) {
     for(const data of usersData) {
        usersList.innerHTML += renderUser(data)
-    }//cuando termines de pintar le aña los eventos a esta data 
-   addEventUser()
+    }
+    addEventToUser()
 }
 
 function renderUser(data) {
-    let html = ` <li>
-           <article class="js-li-user" id=${data.id}>
-              <h2 class="user-name">${data.name.first} ${data.name.last}</h2>
-              <img class="user-img" src=${data.picture.medium} alt="image"/>
-              <h3 class="user-city">${data.location.city}</h3>
-              <h3 class="user-username">${data.login.username}</h3>
+   console.log(data);
+   if (data.isFriend === true) {
+    //Si data.isFriend es true (marcado como amigo) pintamos a lista con la clase selected para que le de el color pink  
+      let html = ` <li>
+            <article class="user selected js-li-user" id=${data.login.username}>
+               <h2 class="user__name">${data.name.first} ${data.name.last}</h2>
+               <img class="user__img" src=${data.picture.medium} alt="image"/>
+               <h3 class="user__city">${data.location.city}</h3>
+               <h3 class="user__username">${data.login.username}</h3>
+            <article/>
+         </li>`;
+      return html;
+   }else {
+      //Si No pintamos la lista sin la clase selected
+        let html = ` <li>
+           <article class="user js-li-user" id=${data.login.username}>
+              <h2 class="user__name">${data.name.first} ${data.name.last}</h2>
+              <img class="user__img" src=${data.picture.medium} alt="image"/>
+              <h3 class="user__city">${data.location.city}</h3>
+              <h3 class="user__username">${data.login.username}</h3> 
             <article/>
         </li>`;
-  //console.log(html);
-  return html;
+      return html;
+   }
 }
 
-
-/*2.-Marcar como amigos
-Cuando se haga click en uno de los usuarios:
-1.- En el objeto del usuario clickado dentro del array, añadir una propiedad
-para marcarlo como amigo, ej. isFriend:true.
-2.-Volver a pintar el listado en pantalla:
-   1.-Comprobar si cada ususario pintado es un amigo y en caso afirmativo pintar el color de fondo de otro comor.
-*/
+//2.-Marcar como amigos
 function handleClick(ev) {
-   console.log(ev.currentTarget.id);
-   ev.currentTarget.classList.toggle('selected');
-   
-//3.- Guardar(con push)/Recuperar del localStorage (con find)
- 
-  
+   const idSelected = ev.currentTarget.id;
+   const selectedFriend = usersData.find(user => user.login.username === idSelected);
+   //Añadimos la propiedad isFriend = true a los objetos clicados
+   selectedFriend.isFriend = true;
+   console.log(selectedFriend);
+   document.getElementById(idSelected).classList.toggle('selected');
+   usersList.innerHTML = '';
+   renderUserList(usersData);
 }
 
-
-function addEventUser() {
-  const liElements = document.querySelectorAll(".js-li-user");
-  for(const li of liElements) {
-   // console.log(liElements);
+function addEventToUser() {
+   const liElements = document.querySelectorAll(".js-li-user");
+   for(const li of liElements) {
    li.addEventListener("click", handleClick);
   }
 }
+
+//3.- Guardar/Recuperar del localStorag
+function handleClickSave() {
+   localStorage.setItem("usersList", JSON.stringify (usersData));
+}
+
+function handleClickRecover() {
+   usersData = JSON.parse(localStorage.getItem("usersList"));
+   usersList.innerHTML = '';
+   renderUserList(usersData);
+}
+
+btnSave.addEventListener("click", handleClickSave)
+btnRecover.addEventListener("click", handleClickRecover)
 
 //# sourceMappingURL=main.js.map

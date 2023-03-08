@@ -8,6 +8,36 @@
 @import 'pages/index';
 
 
+.body {
+    background-color: #6666FF;
+    background-image:url(../images/pexels-nicolas.jpg) ;
+    background-size: cover;
+    background-position: center;
+}
+
 .selected {
-    background-color: red;
+    background-color: #E8368C;
+    border-radius: 100px;
+    width: 55vw;
+    height: 27vh;
+    margin: 5px;
+}
+@media all and (min-width: 768px) {
+    .user__img {
+            color: aliceblue;
+            width: 9rem;
+            height: 8rem;
+        }     
+}
+@media all and (min-width: 1200px) {
+    .user__img {
+            color: aliceblue;
+            width: 9rem;
+            height: 8rem;
+        }
+}
+.user {
+    height: 32vh;
+    width: 350px;
+    padding: 5px;
 }

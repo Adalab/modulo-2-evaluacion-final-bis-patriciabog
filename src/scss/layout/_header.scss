@@ -1,5 +1,42 @@
-.page__header {
+.header {
+  height: 12vh;
   display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 3rem;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    color: #fff;
+    font-size: 4rem;
+    font-family: ($font-main);
+  }
+
+}
+.section1 {
+padding: 5px;
+  margin: 5px;
+  display: flex;
+  justify-content: space-around;
+     &__btn-save {
+        width: 33vw;
+        height: 6vh;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 5px 8px;
+        font-family:$font-main;
+        background-color: #fc573f;
+        color: #fff;
+     }
+     &__btn-recover {
+        width: 35vw;
+        height: 6vh;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 5px 8px;
+        font-family: $font-main;
+        background-color: #fc573f;
+        color: #fff;
+     }
 }
